@@ -10,32 +10,46 @@ import (
 )
 
 type MongoRepository struct {
-	_session *mgo.Session
+	database string
+	url string
+	session *mgo.Session
 }
 
-func (this *MongoRepository) session() *mgo.Session {
-	if this._session == nil {
-		session, err := mgo.Dial("localhost")
+func (this *MongoRepository) GetSession() *mgo.Session {
+	if this.session == nil {
+		session, err := mgo.Dial(this.url)
 		if err != nil {
 			panic(err)
 		}
 
-		this._session = session
+		this.session = session
 
 		// Optional. Switch the session to a monotonic behavior.
-		this._session.SetMode(mgo.Monotonic, true)
+		this.session.SetMode(mgo.Monotonic, true)
 	}
-	return this._session.Copy()
+	return this.session.Copy()
+}
+
+func (this *MongoRepository) Get(i *interface{}) error {
+	session := this.GetSession()
+	defer session.Close()
+
+	domain := reflect.TypeOf(i).String()
+	tableName := strings.TrimLeft(domain, "*model.")
+
+	err := session.DB(this.database).C(tableName).Find(i).One(i)
+	return err
+
 }
 
 func (this *MongoRepository) Save(i interface{}) error {
-	session := this.session()
+	session := this.GetSession()
 	defer session.Close()
 
 	domain := reflect.TypeOf(i).String()
 	tableName := strings.TrimLeft(domain, "*.model.")
 
-	err := session.DB("cdis").C(tableName).Insert(i)
+	err := session.DB(this.database).C(tableName).Insert(i)
 	return err
 }
 

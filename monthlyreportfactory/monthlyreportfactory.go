@@ -1,4 +1,5 @@
 package MonthlyReportFactory
+
 import (
 	"github.com/louahola/cdis/model"
 	"github.com/louahola/yahoofinance"
