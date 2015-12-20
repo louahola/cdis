@@ -30,7 +30,7 @@ func (this *MongoRepository) GetSession() *mgo.Session {
 	return this.session.Copy()
 }
 
-func (this *MongoRepository) Get(i *interface{}) error {
+func (this *MongoRepository) Get(i interface{}) error {
 	session := this.GetSession()
 	defer session.Close()
 
@@ -39,7 +39,6 @@ func (this *MongoRepository) Get(i *interface{}) error {
 
 	err := session.DB(this.database).C(tableName).Find(i).One(i)
 	return err
-
 }
 
 func (this *MongoRepository) Save(i interface{}) error {

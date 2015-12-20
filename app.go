@@ -13,6 +13,8 @@ func main() {
 	var repo repository.Repository = new(repository.MongoRepository)
 
 	api.Initialize(repo)
+
+	web := &web.WebManager{}
 	web.Initialize(repo)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))

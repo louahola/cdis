@@ -1,0 +1,27 @@
+{
+	"ImportPath": "github.com/louahola/cdis",
+	"GoVersion": "go1.5",
+	"Deps": [
+		{
+			"ImportPath": "github.com/louahola/auth",
+			"Rev": "cc6f5d2a8d2dbf8b34f2f8dcecac3387dc1059bb"
+		},
+		{
+			"ImportPath": "github.com/louahola/yahoofinance",
+			"Rev": "aecbdef572e7859c0c8b9e5bd29d2800c4b272c8"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "d5cd7348bfebdf7dbb6dbb18fa488525f9024293"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2",
+			"Rev": "2baa8a1b9338cf13d9eeb27696d761155fa480be"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2015.10.05-1-g4d04138",
+			"Rev": "4d04138ffef2791c479c0c8bbffc30b34081b8d9"
+		}
+	]
+}
